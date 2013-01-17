@@ -78,7 +78,7 @@ class ShopController extends AppController {
 				$p = explode('-', $key);
 				$this->Cart->add($p[1], $value);
 			}
-			$this->Session->setFlash('Shooping Cart is updated.', 'flash_success');
+			$this->Session->setFlash('Shopping Cart is updated.', 'flash_success');
 		}
 		$this->redirect(array('action' => 'cart'));
 	}
