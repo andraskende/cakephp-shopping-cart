@@ -41,6 +41,16 @@ class CartComponent extends Component {
 			$this->remove($id);
 			return;
 		}
+		
+		// If item is already in the cart, get its quantity and add to the new value
+		$shop = $this->Session->read('Shop');
+		
+		foreach($shop['OrderItem'] as $item){
+			if($item['product_id'] == $id){
+				$quantity = $quantity + $item['quantity'];
+			}
+		}
+		////////////////////////////////////////////////////////////////////////////
 
 		$product = $this->controller->Product->find('first', array(
 			'recursive' => -1,
