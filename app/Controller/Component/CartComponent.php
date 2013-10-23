@@ -55,17 +55,6 @@ class CartComponent extends Component {
 			return false;
 		}
 
-		$data['product_id'] = $product['Product']['id'];
-		$data['name'] = $product['Product']['name'];
-		$data['weight'] = $product['Product']['weight'];
-		$data['price'] = $product['Product']['price'];
-		$data['quantity'] = $quantity;
-		$data['subtotal'] = sprintf('%01.2f', $product['Product']['price'] * $quantity);
-		$data['totalweight'] = sprintf('%01.2f', $product['Product']['weight'] * $quantity);
-		$data['Product'] = $product['Product'];
-		$this->Session->write('Shop.OrderItem.' . $id, $data);
-		$this->Session->write('Shop.Order.shop', 1);
-
 		$this->Cart = ClassRegistry::init('Cart');
 
 		$cartdata['Cart']['sessionid'] = $this->Session->id();
@@ -86,10 +75,25 @@ class CartComponent extends Component {
 		));
 		if($existing) {
 			$cartdata['Cart']['id'] = $existing['Cart']['id'];
+			$cartdata['Cart']['quantity'] = $existing['Cart']['quantity'] + $quantity;
+			$cartdata['Cart']['weight_total'] = sprintf('%01.2f', $cartdata['Cart']['weight_total'] * $cartdata['Cart']['quantity']);
+			$cartdata['Cart']['subtotal'] = sprintf('%01.2f', $cartdata['Cart']['price'] * $cartdata['Cart']['quantity']);
+
 		} else {
 			$this->Cart->create();
 		}
 		$this->Cart->save($cartdata, false);
+
+		$data['product_id'] = $product['Product']['id'];
+		$data['name'] = $product['Product']['name'];
+		$data['weight'] = $product['Product']['weight'];
+		$data['price'] = $product['Product']['price'];
+		$data['quantity'] = $cartdata['Cart']['quantity'];
+		$data['subtotal'] = $cartdata['Cart']['subtotal'];
+		$data['totalweight'] = $cartdata['Cart']['weight_total'];
+		$data['Product'] = $product['Product'];
+		$this->Session->write('Shop.OrderItem.' . $id, $data);
+		$this->Session->write('Shop.Order.shop', 1);
 
 		$this->cart();
 
