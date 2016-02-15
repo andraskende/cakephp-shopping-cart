@@ -11,7 +11,7 @@ class Tag extends AppModel {
     public $validate = array(
         'name' => array(
             'rule1' => array(
-                'rule' => array('between', 3, 50),
+                'rule' => array('lengthBetween', 3, 50),
                 'message' => 'Name is required',
                 'allowEmpty' => false,
                 'required' => false,

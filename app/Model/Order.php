@@ -7,7 +7,7 @@ class Order extends AppModel {
     public $validate = array(
         'name' => array(
             'rule1' => array(
-                'rule' => array('notempty'),
+                'rule' => array('notBlank'),
                 'message' => 'Name is invalid',
             ),
         ),
@@ -25,37 +25,37 @@ class Order extends AppModel {
         ),
         'billing_address' => array(
             'rule1' => array(
-                'rule' => array('notempty'),
+                'rule' => array('notBlank'),
                 'message' => 'Billing Address is invalid',
             ),
         ),
         'billing_city' => array(
             'rule1' => array(
-                'rule' => array('notempty'),
+                'rule' => array('notBlank'),
                 'message' => 'Billing City is invalid',
             ),
         ),
         'billing_state' => array(
             'rule1' => array(
-                'rule' => array('notempty'),
+                'rule' => array('notBlank'),
                 'message' => 'Billing State is invalid',
             ),
         ),
         'shipping_address' => array(
             'rule1' => array(
-                'rule' => array('notempty'),
+                'rule' => array('notBlank'),
                 'message' => 'Shipping Address is invalid',
             ),
         ),
         'shipping_city' => array(
             'rule1' => array(
-                'rule' => array('notempty'),
+                'rule' => array('notBlank'),
                 'message' => 'Shipping City is invalid',
             ),
         ),
         'shipping_state' => array(
             'rule1' => array(
-                'rule' => array('notempty'),
+                'rule' => array('notBlank'),
                 'message' => 'Shipping State is invalid',
             ),
         ),
@@ -67,7 +67,7 @@ class Order extends AppModel {
         ),
         'creditcard_code' => array(
             'rule1' => array(
-                'rule' => array('notEmpty'),
+                'rule' => array('notBlank'),
                 'message' => 'Credit Card Code is required',
             ),
             'rule2' => array(

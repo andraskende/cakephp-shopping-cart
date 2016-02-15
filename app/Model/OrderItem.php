@@ -16,8 +16,8 @@ class OrderItem extends AppModel {
             ),
         ),
         'name' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
+            'rule1' => array(
+                'rule' => array('notBlank'),
                 //'message' => 'Your custom message here',
                 //'allowEmpty' => false,
                 //'required' => false,

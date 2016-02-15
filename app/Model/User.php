@@ -7,7 +7,7 @@ class User extends AppModel {
     public $validate = array(
         'name' => array(
             'rule1' => array(
-                'rule' => array('notempty'),
+                'rule' => array('notBlank'),
                 'message' => 'mame is required',
                 //'allowEmpty' => false,
                 //'required' => false,
@@ -15,7 +15,7 @@ class User extends AppModel {
         ),
         'username' => array(
             'rule1' => array(
-                'rule' => array('between', 3, 60),
+                'rule' => array('lengthBetween', 3, 60),
                 'message' => 'username is required',
                 'allowEmpty' => false,
                 'required' => false,
@@ -29,7 +29,7 @@ class User extends AppModel {
         ),
         'password' => array(
             'rule1' => array(
-                'rule' => array('between', 1, 30),
+                'rule' => array('lengthBetween', 1, 30),
                 'message' => 'password is required'
             ),
         ),
