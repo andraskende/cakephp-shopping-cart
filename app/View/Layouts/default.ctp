@@ -94,7 +94,7 @@
     <div class="content">
         <div class="container">
 
-            <?php echo $this->Session->flash(); ?>
+            <?php echo $this->Flash->render(); ?>
             <br />
             <ul class="breadcrumb">
                 <?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'index')); ?> / <?php echo $this->Html->getCrumbs(' / '); ?>
