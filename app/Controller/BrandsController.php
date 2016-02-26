@@ -85,10 +85,10 @@ class BrandsController extends AppController {
         if ($this->request->is('post')) {
             $this->Brand->create();
             if ($this->Brand->save($this->request->data)) {
-                $this->Session->setFlash('The brand has been saved');
+                $this->Flash->flash('The brand has been saved');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The brand could not be saved. Please, try again.');
+                $this->Flash->flash('The brand could not be saved. Please, try again.');
             }
         }
     }
@@ -101,10 +101,10 @@ class BrandsController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Brand->save($this->request->data)) {
-                $this->Session->setFlash('The brand has been saved');
+                $this->Flash->flash('The brand has been saved');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The brand could not be saved. Please, try again.');
+                $this->Flash->flash('The brand could not be saved. Please, try again.');
             }
         } else {
             $brand = $this->Brand->find('first', array(
@@ -125,10 +125,10 @@ class BrandsController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Brand->delete()) {
-            $this->Session->setFlash('Brand deleted');
+            $this->Flash->flash('Brand deleted');
             return $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash('Brand was not deleted');
+        $this->Flash->flash('Brand was not deleted');
         return $this->redirect(array('action' => 'index'));
     }
 

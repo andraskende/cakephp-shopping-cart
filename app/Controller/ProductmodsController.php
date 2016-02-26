@@ -32,10 +32,10 @@ class ProductmodsController extends AppController {
         if ($this->request->is('post')) {
             $this->Productmod->create();
             if ($this->Productmod->save($this->request->data)) {
-                $this->Session->setFlash('The productmod has been saved.');
+                $this->Flash->flash('The productmod has been saved.');
                 return $this->redirect(array('controller' => 'products', 'action' => 'edit', $id));
             } else {
-                $this->Session->setFlash('The productmod could not be saved. Please, try again.');
+                $this->Flash->flash('The productmod could not be saved. Please, try again.');
             }
         }
         $products = $this->Productmod->Product->find('list', array(
@@ -54,10 +54,10 @@ class ProductmodsController extends AppController {
         }
         if ($this->request->is(array('post', 'put'))) {
             if ($this->Productmod->save($this->request->data)) {
-                $this->Session->setFlash('The productmod has been saved.');
+                $this->Flash->flash('The productmod has been saved.');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The productmod could not be saved. Please, try again.');
+                $this->Flash->flash('The productmod could not be saved. Please, try again.');
             }
         } else {
             $options = array('conditions' => array('Productmod.id' => $id));
@@ -76,9 +76,9 @@ class ProductmodsController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Productmod->delete()) {
-            $this->Session->setFlash('The productmod has been deleted.');
+            $this->Flash->flash('The productmod has been deleted.');
         } else {
-            $this->Session->setFlash('The productmod could not be deleted. Please, try again.');
+            $this->Flash->flash('The productmod could not be deleted. Please, try again.');
         }
         return $this->redirect(array('action' => 'index'));
     }

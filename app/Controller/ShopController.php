@@ -26,7 +26,7 @@ class ShopController extends AppController {
 
     public function clear() {
         $this->Cart->clear();
-        $this->Session->setFlash('All item(s) removed from your shopping cart', 'flash_error');
+        $this->Flash->danger('All item(s) removed from your shopping cart');
         return $this->redirect('/');
     }
 
@@ -44,9 +44,9 @@ class ShopController extends AppController {
             $product = $this->Cart->add($id, $quantity, $productmodId);
         }
         if(!empty($product)) {
-            $this->Session->setFlash($product['Product']['name'] . ' was added to your shopping cart.', 'flash_success');
+            $this->Flash->success($product['Product']['name'] . ' was added to your shopping cart.');
         } else {
-            $this->Session->setFlash('Unable to add this product to your shopping cart.', 'flash_error');
+            $this->Flash->danger('Unable to add this product to your shopping cart.');
         }
         $this->redirect($this->referer());
     }
@@ -88,7 +88,7 @@ class ShopController extends AppController {
     public function remove($id = null) {
         $product = $this->Cart->remove($id);
         if(!empty($product)) {
-            $this->Session->setFlash($product['Product']['name'] . ' was removed from your shopping cart', 'flash_error');
+            $this->Flash->danger($product['Product']['name'] . ' was removed from your shopping cart');
         }
         return $this->redirect(array('action' => 'cart'));
     }
@@ -102,7 +102,7 @@ class ShopController extends AppController {
                 $p = explode('_', $p[1]);
                 $this->Cart->add($p[0], $value, $p[1]);
             }
-            $this->Session->setFlash('Shopping Cart is updated.', 'flash_success');
+            // $this->Flash->success('Shopping Cart is updated.');
         }
         return $this->redirect(array('action' => 'cart'));
     }
@@ -132,7 +132,7 @@ class ShopController extends AppController {
                 $this->Session->write('Shop.Order', $order + $shop['Order']);
                 return $this->redirect(array('action' => 'review'));
             } else {
-                $this->Session->setFlash('The form could not be saved. Please, try again.', 'flash_error');
+                $this->Flash->danger('The form could not be saved. Please, try again.');
             }
         }
         if(!empty($shop['Order'])) {
@@ -218,7 +218,7 @@ class ShopController extends AppController {
                     try {
                         $authorizeNet = $this->AuthorizeNet->charge($shop['Order'], $payment);
                     } catch(Exception $e) {
-                        $this->Session->setFlash($e->getMessage());
+                        $this->Flash->flash($e->getMessage());
                         return $this->redirect(array('action' => 'review'));
                     }
                     $order['Order']['authorization'] = $authorizeNet[4];

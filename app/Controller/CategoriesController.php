@@ -108,10 +108,10 @@ class CategoriesController extends AppController {
         if ($this->request->is('post')) {
             $this->Category->create();
             if ($this->Category->save($this->request->data)) {
-                $this->Session->setFlash('The category has been saved');
+                $this->Flash->flash('The category has been saved');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The category could not be saved. Please, try again.');
+                $this->Flash->flash('The category could not be saved. Please, try again.');
             }
         }
 
@@ -127,10 +127,10 @@ class CategoriesController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
-                $this->Session->setFlash('The category has been saved');
+                $this->Flash->flash('The category has been saved');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The category could not be saved. Please, try again.');
+                $this->Flash->flash('The category could not be saved. Please, try again.');
             }
         } else {
             $this->request->data = $this->Category->find('first', array('conditions' => array('Category.id' => $id)));
@@ -149,10 +149,10 @@ class CategoriesController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Category->delete()) {
-            $this->Session->setFlash('Category deleted');
+            $this->Flash->flash('Category deleted');
             return $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash('Category was not deleted');
+        $this->Flash->flash('Category was not deleted');
         return $this->redirect(array('action' => 'index'));
     }
 

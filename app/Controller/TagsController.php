@@ -37,11 +37,11 @@ class TagsController extends AppController {
         if ($this->request->is('post')) {
             $this->Tag->create();
             if ($this->Tag->save($this->request->data)) {
-                $this->Session->setFlash('The tag has been saved.');
+                $this->Flash->flash('The tag has been saved.');
                 return $this->redirect($this->referer());
                 // return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The tag could not be saved. Please, try again.');
+                $this->Flash->flash('The tag could not be saved. Please, try again.');
             }
         }
     }
@@ -54,10 +54,10 @@ class TagsController extends AppController {
         }
         if ($this->request->is(array('post', 'put'))) {
             if ($this->Tag->save($this->request->data)) {
-                $this->Session->setFlash('The tag has been saved.');
+                $this->Flash->flash('The tag has been saved.');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The tag could not be saved. Please, try again.');
+                $this->Flash->flash('The tag could not be saved. Please, try again.');
             }
         } else {
             $options = array('conditions' => array('Tag.id' => $id));
@@ -74,9 +74,9 @@ class TagsController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Tag->delete()) {
-            $this->Session->setFlash('The tag has been deleted.');
+            $this->Flash->flash('The tag has been deleted.');
         } else {
-            $this->Session->setFlash('The tag could not be deleted. Please, try again.');
+            $this->Flash->flash('The tag could not be deleted. Please, try again.');
         }
         return $this->redirect(array('action' => 'index'));
     }

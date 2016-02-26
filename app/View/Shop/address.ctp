@@ -64,6 +64,6 @@
 
 <br />
 
-<?php echo $this->Form->button('Continue', array('class' => 'btn btn-default btn-primary'));?>
+<?php echo $this->Form->button('<i class="fa fa-check"></i> &nbsp; Continue', array('class' => 'btn btn-sm btn-success'));?>
 <?php echo $this->Form->end(); ?>
 

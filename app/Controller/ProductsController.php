@@ -359,10 +359,10 @@ class ProductsController extends AppController {
             }
 
             if ($this->Product->save($this->request->data)) {
-                $this->Session->setFlash($upload);
+                $this->Flash->flash($upload);
                 return $this->redirect($this->referer());
             } else {
-                $this->Session->setFlash('The Product could not be saved. Please, try again.');
+                $this->Flash->flash('The Product could not be saved. Please, try again.');
             }
         }
 
@@ -388,10 +388,10 @@ class ProductsController extends AppController {
         if ($this->request->is('post')) {
             $this->Product->create();
             if ($this->Product->save($this->request->data)) {
-                $this->Session->setFlash('The product has been saved');
+                $this->Flash->flash('The product has been saved');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The product could not be saved. Please, try again.');
+                $this->Flash->flash('The product could not be saved. Please, try again.');
             }
         }
         $brands = $this->Product->Brand->find('list');
@@ -404,15 +404,28 @@ class ProductsController extends AppController {
 ////////////////////////////////////////////////////////////
 
     public function admin_edit($id = null) {
+
+        // $_SESSION['KCFINDER'] = array(
+        //     'disabled' => false,
+        //     'uploadURL' => '../images/products',
+        //     'uploadDir' => '',
+        //     'dirPerms' => 0777,
+        //     'filePerms' => 0777
+        // );
+
         if (!$this->Product->exists($id)) {
             throw new NotFoundException('Invalid product');
         }
         if ($this->request->is('post') || $this->request->is('put')) {
+
+            // var_dump($this->request->data);
+            // die;
+
             if ($this->Product->save($this->request->data)) {
-                $this->Session->setFlash('The product has been saved');
+                $this->Flash->flash('The product has been saved');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The product could not be saved. Please, try again.');
+                $this->Flash->flash('The product could not be saved. Please, try again.');
             }
         } else {
             $product = $this->Product->find('first', array(
@@ -422,6 +435,8 @@ class ProductsController extends AppController {
             ));
             $this->request->data = $product;
         }
+
+        $this->set(compact('id'));
 
         $this->set(compact('product'));
 
@@ -433,7 +448,7 @@ class ProductsController extends AppController {
 
         $productmods = $this->Product->Productmod->find('all', array(
             'conditions' => array(
-                'Productmod.product_id' => $product['Product']['id']
+                'Productmod.product_id' => $id
             )
         ));
         $this->set(compact('productmods'));
@@ -513,10 +528,10 @@ class ProductsController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Product->delete()) {
-            $this->Session->setFlash('Product deleted');
+            $this->Flash->flash('Product deleted');
             return $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash('Product was not deleted');
+        $this->Flash->flash('Product was not deleted');
         return $this->redirect(array('action' => 'index'));
     }
 

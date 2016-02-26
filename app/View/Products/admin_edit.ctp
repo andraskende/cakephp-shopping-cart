@@ -5,7 +5,7 @@
 <br />
 
 <div class="row">
-    <div class="col-sm-5">
+    <div class="col-sm-8">
 
         <?php echo $this->Form->create('Product'); ?>
         <?php echo $this->Form->input('id'); ?>
@@ -37,30 +37,30 @@
     </div>
 </div>
 
-<?php echo $this->Html->script('ckeditor/ckeditor', array('inline' => false)); ?>
-
-<script type="text/javascript">
-
-    var basePath = "<?php echo Router::url('/'); ?>";
-
-    CKEDITOR.replace('ProductDescription', {
-        filebrowserBrowseUrl : basePath + 'js/kcfinder/browse.php?type=files',
-        filebrowserImageBrowseUrl : basePath + 'js/kcfinder/browse.php?type=images',
-        filebrowserFlashBrowseUrl : basePath + 'js/kcfinder/browse.php?type=flash',
-        filebrowserUploadUrl : basePath + 'js/kcfinder/upload.php?type=files',
-        filebrowserImageUploadUrl : basePath + 'js/kcfinder/upload.php?type=images',
-        filebrowserFlashUploadUrl : basePath + 'js/kcfinder/upload.php?type=flash'
-    });
-
+<!-- <script src="//cdn.ckeditor.com/4.5.7/full-all/ckeditor.js"></script> -->
+<script>
+    // jQuery(document).ready(function($){
+    //     var _content = $('#ProductDescription').get(0);
+    //     var basePath = "<?php echo Router::url('/'); ?>";
+    //     var editor = CKEDITOR.replace( _content,
+    //     {
+    //         height: 400,
+    //         filebrowserBrowseUrl : basePath + 'kcfinder/browse.php?type=files',
+    //         filebrowserImageBrowseUrl : basePath + 'kcfinder/browse.php?type=images',
+    //         filebrowserFlashBrowseUrl : basePath + 'kcfinder/browse.php?type=flash',
+    //         filebrowserUploadUrl : basePath + 'kcfinder/upload.php?type=files',
+    //         filebrowserImageUploadUrl : basePath + 'kcfinder/upload.php?type=images',
+    //         filebrowserFlashUploadUrl : basePath + 'kcfinder/upload.php?type=flash'
+    //     });
+    // });
 </script>
-
 
 <br />
 <br />
 
 <h4>Product Modification:</h4>
 
-<?php echo $this->Html->link('Add new Productmods', array('controller' => 'productmods', 'action' => 'add', $product['Product']['id']), array('class' => 'btn btn-default')); ?>
+<?php echo $this->Html->link('Add new Productmods', array('controller' => 'productmods', 'action' => 'add', $id), array('class' => 'btn btn-default')); ?>
 
 <?php if(!empty($productmods)): ?>
 

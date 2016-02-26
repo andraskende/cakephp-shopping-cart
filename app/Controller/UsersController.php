@@ -30,12 +30,6 @@ class UsersController extends AppController {
                         'admin' => false
                     ));
                 } elseif ($this->Auth->user('role') == 'admin') {
-                    $uploadURL = Router::url('/') . 'app/webroot/upload';
-                    $_SESSION['KCFINDER'] = array(
-                        'disabled' => false,
-                        'uploadURL' => $uploadURL,
-                        'uploadDir' => ''
-                    );
                     return $this->redirect(array(
                         'controller' => 'users',
                         'action' => 'dashboard',
@@ -43,10 +37,10 @@ class UsersController extends AppController {
                         'admin' => true
                     ));
                 } else {
-                    $this->Session->setFlash('Login is incorrect');
+                    $this->Flash->danger('Login is incorrect');
                 }
             } else {
-                $this->Session->setFlash('Login is incorrect');
+                $this->Flash->danger('Login is incorrect');
             }
         }
     }
@@ -54,7 +48,7 @@ class UsersController extends AppController {
 ////////////////////////////////////////////////////////////
 
     public function logout() {
-        $this->Session->setFlash('Good-Bye');
+        $this->Flash->flash('Good-Bye');
         $_SESSION['KCEDITOR']['disabled'] = true;
         unset($_SESSION['KCEDITOR']);
         return $this->redirect($this->Auth->logout());
@@ -110,10 +104,10 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash('The user has been saved');
+                $this->Flash->flash('The user has been saved');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The user could not be saved. Please, try again.');
+                $this->Flash->flash('The user could not be saved. Please, try again.');
             }
         }
     }
@@ -127,10 +121,10 @@ class UsersController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash('The user has been saved');
+                $this->Flash->flash('The user has been saved');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The user could not be saved. Please, try again.');
+                $this->Flash->flash('The user could not be saved. Please, try again.');
             }
         } else {
             $this->request->data = $this->User->read(null, $id);
@@ -146,10 +140,10 @@ class UsersController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash('The user has been saved');
+                $this->Flash->flash('The user has been saved');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The user could not be saved. Please, try again.');
+                $this->Flash->flash('The user could not be saved. Please, try again.');
             }
         } else {
             $this->request->data = $this->User->read(null, $id);
@@ -167,10 +161,10 @@ class UsersController extends AppController {
             throw new NotFoundException('Invalid user');
         }
         if ($this->User->delete()) {
-            $this->Session->setFlash('User deleted');
+            $this->Flash->flash('User deleted');
             return $this->redirect(array('action'=>'index'));
         }
-        $this->Session->setFlash('User was not deleted');
+        $this->Flash->flash('User was not deleted');
         return $this->redirect(array('action' => 'index'));
     }
 

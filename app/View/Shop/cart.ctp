@@ -53,9 +53,9 @@ Shopping Cart is empty
 <div class="row">
     <div class="col col-sm-12">
         <div class="pull-right">
-        <?php echo $this->Html->link('<i class="icon-remove icon"></i> Clear Cart', array('controller' => 'shop', 'action' => 'clear'), array('class' => 'btn btn-danger', 'escape' => false)); ?>
+        <?php echo $this->Html->link('<i class="fa fa-ban"></i> &nbsp; Clear Shopping Cart', array('controller' => 'shop', 'action' => 'clear'), array('class' => 'btn btn-sm btn-danger', 'escape' => false)); ?>
         &nbsp; &nbsp;
-        <?php echo $this->Form->button('<i class="icon-refresh icon"></i> Recalculate', array('class' => 'btn btn-default', 'escape' => false));?>
+        <?php echo $this->Form->button('<i class="fa fa-calculator"></i> &nbsp; Update', array('class' => 'btn btn-sm btn-default', 'escape' => false));?>
         <?php echo $this->Form->end(); ?>
         </div>
     </div>
@@ -78,7 +78,7 @@ Shopping Cart is empty
         <br />
         <br />
 
-        <?php echo $this->Html->link('<i class="glyphicon glyphicon-arrow-right"></i> Checkout', array('controller' => 'shop', 'action' => 'address'), array('class' => 'btn btn-primary', 'escape' => false)); ?>
+        <?php echo $this->Html->link('<i class="fa fa-check"></i> &nbsp; Checkout', array('controller' => 'shop', 'action' => 'address'), array('class' => 'btn btn-sm btn-success', 'escape' => false)); ?>
 
         <br />
         <br />

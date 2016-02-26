@@ -51,10 +51,10 @@ class OrdersController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Order->save($this->request->data)) {
-                $this->Session->setFlash('The order has been saved');
+                $this->Flash->flash('The order has been saved');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash('The order could not be saved. Please, try again.');
+                $this->Flash->flash('The order could not be saved. Please, try again.');
             }
         } else {
             $this->request->data = $this->Order->read(null, $id);
@@ -72,10 +72,10 @@ class OrdersController extends AppController {
             throw new NotFoundException('Invalid order');
         }
         if ($this->Order->delete()) {
-            $this->Session->setFlash('Order deleted');
+            $this->Flash->flash('Order deleted');
             return $this->redirect(array('action'=>'index'));
         }
-        $this->Session->setFlash('Order was not deleted');
+        $this->Flash->flash('Order was not deleted');
         return $this->redirect(array('action' => 'index'));
     }
 

@@ -4,7 +4,7 @@
 
 <?php echo $this->Html->script(array('jquery.validate.js', 'additional-methods.js', 'shop_review.js'), array('inline' => false)); ?>
 
-<h1>Order Review</h1>
+<h1>Review And Place Your Order</h1>
 
 <hr>
 
@@ -15,8 +15,7 @@
                 <h3 class="panel-title">Customer Info</h3>
             </div>
             <div class="panel-body">
-                First Name: <?php echo $shop['Order']['first_name'];?><br />
-                Last Name: <?php echo $shop['Order']['last_name'];?><br />
+                <?php echo $shop['Order']['first_name'];?> <?php echo $shop['Order']['last_name'];?><br />
                 Email: <?php echo $shop['Order']['email'];?><br />
                 Phone: <?php echo $shop['Order']['phone'];?>
             </div>
@@ -28,12 +27,11 @@
                 <h3 class="panel-title">Billing Address</h3>
             </div>
             <div class="panel-body">
-                Billing Address: <?php echo $shop['Order']['billing_address'];?><br />
-                Billing Address 2: <?php echo $shop['Order']['billing_address2'];?><br />
-                Billing City: <?php echo $shop['Order']['billing_city'];?><br />
-                Billing State: <?php echo $shop['Order']['billing_state'];?><br />
-                Billing Zip: <?php echo $shop['Order']['billing_zip'];?><br />
-                Billing Country: <?php echo $shop['Order']['billing_country'];?>
+                <?php echo $shop['Order']['first_name'];?> <?php echo $shop['Order']['last_name'];?><br />
+                <?php echo $shop['Order']['billing_address'];?><br />
+                <?php echo $shop['Order']['billing_address2'];?><br />
+                <?php echo $shop['Order']['billing_city'];?>, <?php echo $shop['Order']['billing_state'];?> <?php echo $shop['Order']['billing_zip'];?><br />
+                <?php echo $shop['Order']['billing_country'];?>
             </div>
         </div>
     </div>
@@ -43,12 +41,11 @@
                 <h3 class="panel-title">Shipping Address</h3>
             </div>
             <div class="panel-body">
-                Shipping Address: <?php echo $shop['Order']['shipping_address'];?><br />
-                Shipping Address 2: <?php echo $shop['Order']['shipping_address2'];?><br />
-                Shipping City: <?php echo $shop['Order']['shipping_city'];?><br />
-                Shipping State: <?php echo $shop['Order']['shipping_state'];?><br />
-                Shipping Zip: <?php echo $shop['Order']['shipping_zip'];?><br />
-                Shipping Country: <?php echo $shop['Order']['shipping_country'];?>
+                <?php echo $shop['Order']['first_name'];?> <?php echo $shop['Order']['last_name'];?><br />
+                <?php echo $shop['Order']['shipping_address'];?><br />
+                <?php echo $shop['Order']['shipping_address2'];?><br />
+                <?php echo $shop['Order']['shipping_city'];?>, <?php echo $shop['Order']['shipping_state'];?> <?php echo $shop['Order']['shipping_zip'];?><br />
+                <?php echo $shop['Order']['shipping_country'];?>
             </div>
         </div>
     </div>
@@ -164,7 +161,7 @@
 
 <?php endif; ?>
 
-<?php echo $this->Form->button('Submit Order', array('class' => 'btn btn-primary', 'ecape' => false)); ?>
+<?php echo $this->Form->button('<i class="fa fa-check"></i> &nbsp; Place your order', array('class' => 'btn btn-sm btn-success', 'ecape' => false)); ?>
 
 <?php echo $this->Form->end(); ?>
 
