@@ -2,7 +2,7 @@
 #debug-kit-toolbar {
 	position: fixed;
 	top: 0;
-	right:0px;
+	right:0;
 	width: 100%;
 	height: 1%;
 	overflow: visible;
@@ -66,15 +66,10 @@
 	padding: 4px;
 }
 #debug-kit-toolbar .panel-tab a.edit-value {
-		float: none;
-		display: inline;
+	float: none;
+	display: inline;
 }
 
-/* Hovering over link shows tab, useful for no js  */
-#debug-kit-toolbar .panel-tab a:hover + .panel-content,
-#debug-kit-toolbar .panel-tab a + .panel-content:hover {
-	display: block;
-}
 #debug-kit-toolbar .panel-tab.icon a {
 	border-radius: 8px 0 0 8px;
 }
@@ -88,11 +83,11 @@
 	text-align: left;
 	width: auto;
 	top:28px;
-	right:0px;
+	right:0;
 	background: #fff;
 	color: #000;
 	width:100%;
-	box-shadow:0px 5px 6px rgba(0, 0, 0, 0.5);
+	box-shadow:0 5px 6px rgba(0, 0, 0, 0.5);
 	height: 200px;
 	overflow: hidden;
 }
@@ -350,6 +345,9 @@
 }
 #sqllog-tab input[type=submit]:hover {
 	color: darkred;
+}
+#debug-kit-toolbar .alert-duplicate {
+	color: red;
 }
 
 /* previous panels */
