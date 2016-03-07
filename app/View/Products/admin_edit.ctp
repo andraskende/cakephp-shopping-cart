@@ -37,22 +37,22 @@
     </div>
 </div>
 
-<!-- <script src="//cdn.ckeditor.com/4.5.7/full-all/ckeditor.js"></script> -->
+<script src="//cdn.ckeditor.com/4.5.7/full-all/ckeditor.js"></script>
 <script>
-    // jQuery(document).ready(function($){
-    //     var _content = $('#ProductDescription').get(0);
-    //     var basePath = "<?php echo Router::url('/'); ?>";
-    //     var editor = CKEDITOR.replace( _content,
-    //     {
-    //         height: 400,
-    //         filebrowserBrowseUrl : basePath + 'kcfinder/browse.php?type=files',
-    //         filebrowserImageBrowseUrl : basePath + 'kcfinder/browse.php?type=images',
-    //         filebrowserFlashBrowseUrl : basePath + 'kcfinder/browse.php?type=flash',
-    //         filebrowserUploadUrl : basePath + 'kcfinder/upload.php?type=files',
-    //         filebrowserImageUploadUrl : basePath + 'kcfinder/upload.php?type=images',
-    //         filebrowserFlashUploadUrl : basePath + 'kcfinder/upload.php?type=flash'
-    //     });
-    // });
+    jQuery(document).ready(function($){
+        var _content = $('#ProductDescription').get(0);
+        var basePath = "<?php echo Router::url('/'); ?>";
+        var editor = CKEDITOR.replace( _content,
+        {
+            height: 400,
+            filebrowserBrowseUrl : basePath + 'kcfinder/browse.php?type=files',
+            filebrowserImageBrowseUrl : basePath + 'kcfinder/browse.php?type=images',
+            filebrowserFlashBrowseUrl : basePath + 'kcfinder/browse.php?type=flash',
+            filebrowserUploadUrl : basePath + 'kcfinder/upload.php?type=files',
+            filebrowserImageUploadUrl : basePath + 'kcfinder/upload.php?type=images',
+            filebrowserFlashUploadUrl : basePath + 'kcfinder/upload.php?type=flash'
+        });
+    });
 </script>
 
 <br />

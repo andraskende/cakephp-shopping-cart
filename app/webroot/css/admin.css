@@ -1,47 +1,48 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,700,600);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 body {
-	font-family: 'Open Sans', sans-serif;
-	padding-bottom: 40px;
-	background: #E2E2E2;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+    padding-bottom: 40px;
+    background: #E2E2E2;
 }
 
 .content {
-	font-size: 80%;
-	padding: 15px;
-	margin-top: -20px;
-	background: #FFFFFF;
+    font-size: 80%;
+    padding: 15px;
+    margin-top: -20px;
+    background: #FFFFFF;
 }
 
 .footer {
-	font-size: 80%;
-	padding: 15px;
-	background: #EFEFEF;
+    font-size: 80%;
+    padding: 15px;
+    background: #EFEFEF;
 }
 
 .sqldump {
-	font-size: 80%;
-	padding: 15px;
+    font-size: 80%;
+    padding: 15px;
 }
 
 .error {
-	color: #CC0000;
+    color: #CC0000;
 }
 
 #flashMessage{
-	margin-top:10px;
-	margin-bottom:10px;
-	padding:10px;
-	background:#EEEEEE;
-	color:#444444;
+    margin-top:10px;
+    margin-bottom:10px;
+    padding:10px;
+    background:#EEEEEE;
+    color:#444444;
 }
 
 .checkbox {
-	padding-left: 20px;
+    padding-left: 20px;
 }
 
 .radio label,
 .checkbox label {
-	display: inline;
-	padding-left: 0px;
+    display: inline;
+    padding-left: 0px;
 }

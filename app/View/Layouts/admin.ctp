@@ -36,7 +36,6 @@
                 <li><?php echo $this->Html->link('Product Mods', array('controller' => 'productmods', 'action' => 'index', 'admin' => true)); ?></li>
                 <li><?php echo $this->Html->link('Orders', array('controller' => 'orders', 'action' => 'index', 'admin' => true)); ?></li>
                 <li><?php echo $this->Html->link('Orders Items', array('controller' => 'order_items', 'action' => 'index', 'admin' => true)); ?></li>
-                <li><?php echo $this->Html->link('Shopping Carts', array('controller' => 'carts', 'action' => 'index', 'admin' => true)); ?></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Utils<b class="caret"></b></a>
                     <ul class="dropdown-menu">

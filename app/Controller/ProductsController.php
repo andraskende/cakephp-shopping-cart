@@ -304,13 +304,6 @@ class ProductsController extends AppController {
             );
         }
 
-        // $categories= $this->Product->Category->find('list', array(
-        //  'recursive' => -1,
-        //  'order' => array(
-        //      'Category.name' => 'ASC'
-        //  )
-        // ));
-
         $categories = $this->Product->Category->generateTreeList(null, null, null, '--');
 
         $categorieseditable = array();
@@ -405,21 +398,18 @@ class ProductsController extends AppController {
 
     public function admin_edit($id = null) {
 
-        // $_SESSION['KCFINDER'] = array(
-        //     'disabled' => false,
-        //     'uploadURL' => '../images/products',
-        //     'uploadDir' => '',
-        //     'dirPerms' => 0777,
-        //     'filePerms' => 0777
-        // );
+        $_SESSION['KCFINDER'] = array(
+            'disabled' => false,
+            'uploadURL' => '../images/products',
+            'uploadDir' => '',
+            'dirPerms' => 0777,
+            'filePerms' => 0777
+        );
 
         if (!$this->Product->exists($id)) {
             throw new NotFoundException('Invalid product');
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-
-            // var_dump($this->request->data);
-            // die;
 
             if ($this->Product->save($this->request->data)) {
                 $this->Flash->flash('The product has been saved');
