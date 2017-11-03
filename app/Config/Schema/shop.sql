@@ -221,7 +221,7 @@ CREATE TABLE `users` (
 --  Records of `users`
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` VALUES ('1', 'admin', 'admin', 'admin', '009bb9a65ad55d0e8c9d0d86dcb5bb61755b4612', '1', '2011-09-26 00:34:07', '2016-03-07 10:00:48'), ('2', 'customer', 'andras', 'andras', '009bb9a65ad55d0e8c9d0d86dcb5bb61755b4612', '1', '2013-10-29 16:58:16', '2014-05-21 05:59:55');
+INSERT INTO `users` VALUES ('1', 'admin', 'admin', 'admin', 'e4b93d46b915b203d091339f83a1364196d4258f', '1', '2011-09-26 00:34:07', '2016-03-07 10:00:48'), ('2', 'customer', 'andras', 'andras', '009bb9a65ad55d0e8c9d0d86dcb5bb61755b4612', '1', '2013-10-29 16:58:16', '2014-05-21 05:59:55');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
