@@ -1,6 +1,6 @@
 -A simple PHP Shopping Cart built with CakePHP PHP framework.
 -
--- CakePHP 2.7 rapid development php framework
+-- CakePHP 2.x rapid development php framework
 -- CakePHP DebugKit
 -- Bootstrap 3 front-end framework with Mobile Friendly Responsive design
 -- jQuery, jQuery UI JavaScript Library
@@ -34,4 +34,4 @@
 -////////////////////////////////////////////////////////////////////
 -
 -http://andraskende.github.com/cakephp-shopping-cart
-- 
+-
