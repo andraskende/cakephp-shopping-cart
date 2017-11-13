@@ -50,5 +50,4 @@ Dont forget to change passwords, salt in core.php, etc...
 
 ////////////////////////////////////////////////////////////////////
 
-[http://andraskende.github.com/cakephp-shopping-cart](http://andraskende.github.com/cakephp-shopping-cart)
 
