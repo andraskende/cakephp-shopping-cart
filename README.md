@@ -50,4 +50,5 @@ Dont forget to change passwords, salt in core.php, etc...
 
 ////////////////////////////////////////////////////////////////////
 
+CakePHP 3 Shopping Cart -> https://github.com/jeffersonbehling/cake-shopping-cart
 
