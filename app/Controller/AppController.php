@@ -133,27 +133,4 @@ class AppController extends Controller {
 
 ////////////////////////////////////////////////////////////
 
-    public function admin_tagschanger() {
-
-        $value = '';
-
-        asort($this->request->data['value']);
-
-        foreach ($this->request->data['value'] as $k => $v) {
-            $value .= $v . ', ';
-        }
-
-        $value = trim($value);
-        $value = rtrim($value, ',');
-
-
-        $this->Product->id = $this->request->data['pk'];
-        $s = $this->Product->saveField('tags', $value, false);
-
-        $this->autoRender = false;
-
-    }
-
-////////////////////////////////////////////////////////////
-
 }
