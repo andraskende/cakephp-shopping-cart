@@ -23,6 +23,8 @@
 
 	Router::connect('/', array('controller' => 'products', 'action' => 'index'));
 
+	Router::connect('/shop/:slug', array('controller' => 'products', 'action' => 'view'), array('pass' => array('slug')));
+
 	Router::connect('/brand/:slug', array('controller' => 'brands', 'action' => 'view'), array('pass' => array('slug')));
 
 	Router::connect('/category/:slug', array('controller' => 'categories', 'action' => 'view'), array('pass' => array('slug')));
