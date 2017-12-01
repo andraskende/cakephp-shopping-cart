@@ -4,7 +4,9 @@ class ProductmodsController extends AppController {
 
 ////////////////////////////////////////////////////////////
 
-    public $components = array('Paginator');
+    public $components = [
+        'Paginator'
+    ];
 
 ////////////////////////////////////////////////////////////
 
@@ -19,10 +21,12 @@ class ProductmodsController extends AppController {
         if (!$this->Productmod->exists($id)) {
             throw new NotFoundException('Invalid productmod');
         }
-        $options = array(
+        $options = [
             'recursive' => 0,
-            'conditions' => array('Productmod.id' => $id)
-        );
+            'conditions' => [
+                'Productmod.id' => $id
+            ]
+        ];
         $this->set('productmod', $this->Productmod->find('first', $options));
     }
 
@@ -33,16 +37,16 @@ class ProductmodsController extends AppController {
             $this->Productmod->create();
             if ($this->Productmod->save($this->request->data)) {
                 $this->Flash->flash('The productmod has been saved.');
-                return $this->redirect(array('controller' => 'products', 'action' => 'edit', $id));
+                return $this->redirect(['controller' => 'products', 'action' => 'edit', $id]);
             } else {
                 $this->Flash->flash('The productmod could not be saved. Please, try again.');
             }
         }
-        $products = $this->Productmod->Product->find('list', array(
-            'conditions' => array(
+        $products = $this->Productmod->Product->find('list', [
+            'conditions' => [
                 'Product.id' => $id
-            )
-        ));
+            ]
+        ]);
         $this->set(compact('products'));
     }
 
@@ -52,15 +56,19 @@ class ProductmodsController extends AppController {
         if (!$this->Productmod->exists($id)) {
             throw new NotFoundException('Invalid productmod');
         }
-        if ($this->request->is(array('post', 'put'))) {
+        if ($this->request->is(['post', 'put'])) {
             if ($this->Productmod->save($this->request->data)) {
                 $this->Flash->flash('The productmod has been saved.');
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->flash('The productmod could not be saved. Please, try again.');
             }
         } else {
-            $options = array('conditions' => array('Productmod.id' => $id));
+            $options = [
+                'conditions' => [
+                    'Productmod.id' => $id
+                ]
+            ];
             $this->request->data = $this->Productmod->find('first', $options);
         }
         $products = $this->Productmod->Product->find('list');
@@ -80,7 +88,7 @@ class ProductmodsController extends AppController {
         } else {
             $this->Flash->flash('The productmod could not be deleted. Please, try again.');
         }
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(['action' => 'index']);
     }
 
 ////////////////////////////////////////////////////////////

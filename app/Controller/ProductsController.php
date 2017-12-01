@@ -4,9 +4,9 @@ class ProductsController extends AppController {
 
 ////////////////////////////////////////////////////////////
 
-    public $components = array(
+    public $components = [
         'RequestHandler',
-    );
+    ];
 
 ////////////////////////////////////////////////////////////
 
@@ -17,20 +17,20 @@ class ProductsController extends AppController {
 ////////////////////////////////////////////////////////////
 
     public function index() {
-        $products = $this->Product->find('all', array(
+        $products = $this->Product->find('all', [
             'recursive' => -1,
-            'contain' => array(
+            'contain' => [
                 'Brand'
-            ),
+            ],
             'limit' => 20,
-            'conditions' => array(
+            'conditions' => [
                 'Product.active' => 1,
                 'Brand.active' => 1
-            ),
-            'order' => array(
+            ],
+            'order' => [
                 'Product.views' => 'ASC'
-            )
-        ));
+            ]
+        ]);
         $this->set(compact('products'));
 
         $this->Product->updateViews($products);
@@ -44,23 +44,23 @@ class ProductsController extends AppController {
 
         $this->Paginator = $this->Components->load('Paginator');
 
-        $this->Paginator->settings = array(
-            'Product' => array(
+        $this->Paginator->settings = [
+            'Product' => [
                 'recursive' => -1,
-                'contain' => array(
+                'contain' => [
                     'Brand'
-                ),
+                ],
                 'limit' => 20,
-                'conditions' => array(
+                'conditions' => [
                     'Product.active' => 1,
                     'Brand.active' => 1
-                ),
-                'order' => array(
+                ],
+                'order' => [
                     'Product.name' => 'ASC'
-                ),
+                ],
                 'paramType' => 'querystring',
-            )
-        );
+            ]
+        ];
         $products = $this->Paginator->paginate();
         $this->set(compact('products'));
 
@@ -72,20 +72,20 @@ class ProductsController extends AppController {
 
     public function view($id = null) {
 
-        $product = $this->Product->find('first', array(
+        $product = $this->Product->find('first', [
             'recursive' => -1,
-            'contain' => array(
+            'contain' => [
                 'Category',
                 'Brand'
-            ),
-            'conditions' => array(
+            ],
+            'conditions' => [
                 'Brand.active' => 1,
                 'Product.active' => 1,
                 'Product.slug' => $id
-            )
-        ));
+            ]
+        ]);
         if (empty($product)) {
-            return $this->redirect(array('action' => 'index'), 301);
+            return $this->redirect(['action' => 'index'], 301);
         }
 
         $this->Product->updateViews($product);
@@ -109,24 +109,26 @@ class ProductsController extends AppController {
             $search = preg_replace('/[^a-zA-Z0-9 ]/', '', $search);
             $terms = explode(' ', trim($search));
             $terms = array_diff($terms, array(''));
-            $conditions = array(
+            $conditions = [
                 'Brand.active' => 1,
                 'Product.active' => 1,
-            );
+            ];
             foreach($terms as $term) {
                 $terms1[] = preg_replace('/[^a-zA-Z0-9]/', '', $term);
-                $conditions[] = array('Product.name LIKE' => '%' . $term . '%');
+                $conditions[] = [
+                    'Product.name LIKE' => '%' . $term . '%'
+                ];
             }
-            $products = $this->Product->find('all', array(
+            $products = $this->Product->find('all', [
                 'recursive' => -1,
-                'contain' => array(
+                'contain' => [
                     'Brand'
-                ),
+                ],
                 'conditions' => $conditions,
                 'limit' => 200,
-            ));
+            ]);
             if(count($products) == 1) {
-                return $this->redirect(array('controller' => 'products', 'action' => 'view', 'slug' => $products[0]['Product']['slug']));
+                return $this->redirect(['controller' => 'products', 'action' => 'view', 'slug' => $products[0]['Product']['slug']]);
             }
             $terms1 = array_diff($terms1, array(''));
             $this->set(compact('products', 'terms1'));
@@ -158,26 +160,28 @@ class ProductsController extends AppController {
             $term = $this->request->query['term'];
             $terms = explode(' ', trim($term));
             $terms = array_diff($terms, array(''));
-            $conditions = array(
+            $conditions = [
                 // 'Brand.active' => 1,
                 'Product.active' => 1
-            );
+            ];
             foreach($terms as $term) {
-                $conditions[] = array('Product.name LIKE' => '%' . $term . '%');
+                $conditions[] = [
+                    'Product.name LIKE' => '%' . $term . '%'
+                ];
             }
-            $products = $this->Product->find('all', array(
+            $products = $this->Product->find('all', [
                 'recursive' => -1,
-                'contain' => array(
+                'contain' => [
                     // 'Brand'
-                ),
-                'fields' => array(
+                ],
+                'fields' => [
                     'Product.id',
                     'Product.name',
                     'Product.image'
-                ),
+                ],
                 'conditions' => $conditions,
                 'limit' => 20,
-            ));
+            ]);
         }
         // $products = Hash::extract($products, '{n}.Product.name');
         echo json_encode($products);
@@ -188,22 +192,22 @@ class ProductsController extends AppController {
 ////////////////////////////////////////////////////////////
 
     public function sitemap() {
-        $products = $this->Product->find('all', array(
+        $products = $this->Product->find('all', [
             'recursive' => -1,
-            'contain' => array(
+            'contain' => [
                 'Brand'
-            ),
-            'fields' => array(
+            ],
+            'fields' => [
                 'Product.slug'
-            ),
-            'conditions' => array(
+            ],
+            'conditions' => [
                 'Brand.active' => 1,
                 'Product.active' => 1
-            ),
-            'order' => array(
+            ],
+            'order' => [
                 'Product.created' => 'DESC'
-            ),
-        ));
+            ],
+        ]);
         $this->set(compact('products'));
 
         $website = Configure::read('Settings.WEBSITE');
@@ -217,7 +221,7 @@ class ProductsController extends AppController {
 
     public function admin_reset() {
         $this->Session->delete('Product');
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(['action' => 'index']);
     }
 
 ////////////////////////////////////////////////////////////
@@ -227,18 +231,18 @@ class ProductsController extends AppController {
         if ($this->request->is('post')) {
 
             if($this->request->data['Product']['active'] == '1' || $this->request->data['Product']['active'] == '0') {
-                $conditions[] = array(
+                $conditions[] = [
                     'Product.active' => $this->request->data['Product']['active']
-                );
+                ];
                 $this->Session->write('Product.active', $this->request->data['Product']['active']);
             } else {
                 $this->Session->write('Product.active', '');
             }
 
             if(!empty($this->request->data['Product']['brand_id'])) {
-                $conditions[] = array(
+                $conditions[] = [
                     'Product.brand_id' => $this->request->data['Product']['brand_id']
-                );
+                ];
                 $this->Session->write('Product.brand_id', $this->request->data['Product']['brand_id']);
             } else {
                 $this->Session->write('Product.brand_id', '');
@@ -249,76 +253,76 @@ class ProductsController extends AppController {
                 $this->Session->write('Product.filter', $filter);
                 $name = $this->request->data['Product']['name'];
                 $this->Session->write('Product.name', $name);
-                $conditions[] = array(
+                $conditions[] = [
                     'Product.' . $filter . ' LIKE' => '%' . $name . '%'
-                );
+                ];
             } else {
                 $this->Session->write('Product.filter', '');
                 $this->Session->write('Product.name', '');
             }
 
             $this->Session->write('Product.conditions', $conditions);
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
 
         }
 
         if($this->Session->check('Product')) {
             $all = $this->Session->read('Product');
         } else {
-            $all = array(
+            $all = [
                 'active' => '',
                 'brand_id' => '',
                 'name' => '',
                 'filter' => '',
                 'conditions' => ''
-            );
+            ];
         }
         $this->set(compact('all'));
 
         $this->Paginator = $this->Components->load('Paginator');
 
-        $this->Paginator->settings = array(
-            'Product' => array(
-                'contain' => array(
+        $this->Paginator->settings = [
+            'Product' => [
+                'contain' => [
                     'Category',
                     'Brand',
-                ),
+                ],
                 'recursive' => -1,
                 'limit' => 50,
                 'conditions' => $all['conditions'],
-                'order' => array(
+                'order' => [
                     'Product.name' => 'ASC'
-                ),
+                ],
                 'paramType' => 'querystring',
-            )
-        );
+            ]
+        ];
         $products = $this->Paginator->paginate();
 
         $brands = $this->Product->Brand->findList();
 
-        $brandseditable = array();
+        $brandseditable = [];
         foreach ($brands as $key => $value) {
-            $brandseditable[] = array(
+            $brandseditable[] = [
                 'value' => $key,
                 'text' => $value,
-            );
+            ];
         }
 
         $categories = $this->Product->Category->generateTreeList(null, null, null, '--');
 
-        $categorieseditable = array();
+        $categorieseditable = [];
         foreach ($categories as $key => $value) {
-            $categorieseditable[] = array(
+            $categorieseditable[] = [
                 'value' => $key,
                 'text' => $value,
-            );
+            ];
         }
 
-        $tags = ClassRegistry::init('Tag')->find('all', array(
-            'order' => array(
+        $tags = ClassRegistry::init('Tag')->find('all', [
+            'order' => [
                 'Tag.name' => 'ASC'
-            ),
-        ));
+            ],
+        ]);
 
         $this->set(compact('products', 'brands', 'brandseditable', 'categorieseditable', 'tags'));
 
@@ -362,16 +366,16 @@ class ProductsController extends AppController {
         if (!$this->Product->exists($id)) {
             throw new NotFoundException('Invalid product');
         }
-        $product = $this->Product->find('first', array(
+        $product = $this->Product->find('first', [
             'recursive' => -1,
-            'contain' => array(
+            'contain' => [
                 'Category',
                 'Brand',
-            ),
-            'conditions' => array(
+            ],
+            'conditions' => [
                 'Product.id' => $id
-            )
-        ));
+            ]
+        ]);
         $this->set(compact('product'));
     }
 
@@ -382,7 +386,7 @@ class ProductsController extends AppController {
             $this->Product->create();
             if ($this->Product->save($this->request->data)) {
                 $this->Flash->flash('The product has been saved');
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->flash('The product could not be saved. Please, try again.');
             }
@@ -398,13 +402,13 @@ class ProductsController extends AppController {
 
     public function admin_edit($id = null) {
 
-        $_SESSION['KCFINDER'] = array(
+        $_SESSION['KCFINDER'] = [
             'disabled' => false,
             'uploadURL' => '../images/products',
             'uploadDir' => '',
             'dirPerms' => 0777,
             'filePerms' => 0777
-        );
+        ];
 
         if (!$this->Product->exists($id)) {
             throw new NotFoundException('Invalid product');
@@ -413,16 +417,16 @@ class ProductsController extends AppController {
 
             if ($this->Product->save($this->request->data)) {
                 $this->Flash->flash('The product has been saved');
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->flash('The product could not be saved. Please, try again.');
             }
         } else {
-            $product = $this->Product->find('first', array(
-                'conditions' => array(
+            $product = $this->Product->find('first', [
+                'conditions' => [
                     'Product.id' => $id
-                )
-            ));
+                ]
+            ]);
             $this->request->data = $product;
         }
 
@@ -436,11 +440,11 @@ class ProductsController extends AppController {
         $categories = $this->Product->Category->generateTreeList(null, null, null, '--');
         $this->set(compact('categories'));
 
-        $productmods = $this->Product->Productmod->find('all', array(
-            'conditions' => array(
+        $productmods = $this->Product->Productmod->find('all', [
+            'conditions' => [
                 'Productmod.product_id' => $id
-            )
-        ));
+            ]
+        ]);
         $this->set(compact('productmods'));
 
     }
@@ -449,15 +453,15 @@ class ProductsController extends AppController {
 
     public function admin_tags($id = null) {
 
-        $tags = ClassRegistry::init('Tag')->find('all', array(
+        $tags = ClassRegistry::init('Tag')->find('all', [
             'recursive' => -1,
-            'fields' => array(
+            'fields' => [
                 'Tag.name'
-            ),
-            'order' => array(
+            ],
+            'order' => [
                 'Tag.name' => 'ASC'
-            ),
-        ));
+            ],
+        ]);
         $tags = Hash::combine($tags, '{n}.Tag.name', '{n}.Tag.name');
         $this->set(compact('tags'));
 
@@ -476,15 +480,15 @@ class ProductsController extends AppController {
 
             $this->Product->save($this->request->data, false);
 
-            return $this->redirect(array('action' => 'tags', $this->request->data['Product']['id']));
+            return $this->redirect(['action' => 'tags', $this->request->data['Product']['id']]);
 
         }
 
-        $product = $this->Product->find('first', array(
-            'conditions' => array(
+        $product = $this->Product->find('first', [
+            'conditions' => [
                 'Product.id' => $id
-            )
-        ));
+            ]
+        ]);
         if (empty($product)) {
             throw new NotFoundException('Invalid product');
         }
@@ -494,7 +498,7 @@ class ProductsController extends AppController {
         $selectedTags = array_map('trim', $selectedTags);
         $this->set(compact('selectedTags'));
 
-        $neighbors = $this->Product->find('neighbors', array('field' => 'id', 'value' => $id));
+        $neighbors = $this->Product->find('neighbors', ['field' => 'id', 'value' => $id]);
         $this->set(compact('neighbors'));
 
     }
@@ -502,9 +506,9 @@ class ProductsController extends AppController {
 ////////////////////////////////////////////////////////////
 
     public function admin_csv() {
-        $products = $this->Product->find('all', array(
+        $products = $this->Product->find('all', [
             'recursive' => -1,
-        ));
+        ]);
         $this->set(compact('products'));
         $this->layout = false;
     }
@@ -519,10 +523,10 @@ class ProductsController extends AppController {
         $this->request->onlyAllow('post', 'delete');
         if ($this->Product->delete()) {
             $this->Flash->flash('Product deleted');
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
         }
         $this->Flash->flash('Product was not deleted');
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(['action' => 'index']);
     }
 
 ////////////////////////////////////////////////////////////

@@ -61,6 +61,7 @@
                         <?php echo $this->Html->link('Users', ['controller' => 'users', 'action' => 'index', 'admin' => true], ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link('User Add', ['controller' => 'users', 'action' => 'add', 'admin' => true], ['class' => 'dropdown-item']); ?>
                         <?php echo $this->Html->link('Products CSV Export', ['controller' => 'products', 'action' => 'csv', 'admin' => true], ['class' => 'dropdown-item']); ?>
+                        <?php echo $this->Html->link('MySQL Backup', ['controller' => 'mysqldumps', 'action' => 'index', 'admin' => true], ['class' => 'dropdown-item']); ?>
                     </div>
                 </li>
             </ul>

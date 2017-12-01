@@ -6,28 +6,28 @@ class CategoriesController extends AppController {
 
     public function index() {
         $this->helpers[] = 'Tree';
-        $categories = $this->Category->find('all', array(
+        $categories = $this->Category->find('all', [
             'recursive' => -1,
-            'order' => array(
+            'order' => [
                 'Category.lft' => 'ASC'
-            ),
-            'conditions' => array(
-            ),
-        ));
+            ],
+            'conditions' => [
+            ],
+        ]);
         $this->set(compact('categories'));
     }
 
 ////////////////////////////////////////////////////////////
 
     public function view($slug = null) {
-        $category = $this->Category->find('first', array(
+        $category = $this->Category->find('first', [
             'recursive' => -1,
-            'conditions' => array(
+            'conditions' => [
                 'Category.slug' => $slug
-            )
-        ));
+            ]
+        ]);
         if(empty($category)) {
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
         }
         $this->set(compact('category'));
 
@@ -49,16 +49,16 @@ class CategoriesController extends AppController {
 
         //debug($parents);
 
-        $products = $this->Category->Product->find('all', array(
+        $products = $this->Category->Product->find('all', [
             'recursive' => -1,
-            'conditions' => array(
+            'conditions' => [
                 'Product.category_id' => $directChildrenIds
-            ),
-            'order' => array(
+            ],
+            'order' => [
                 'Product.name' => 'ASC'
-            ),
+            ],
             'limit' => 50
-        ));
+        ]);
         $this->set(compact('products'));
     }
 
@@ -66,22 +66,22 @@ class CategoriesController extends AppController {
 
     public function admin_index() {
         $this->Paginator = $this->Components->load('Paginator');
-        $this->Paginator->settings = array(
-            'Category' => array(
+        $this->Paginator->settings = [
+            'Category' => [
                 'recursive' => 0,
-            )
-        );
+            ]
+        ];
         $this->set('categories', $this->Paginator->paginate());
 
         $this->helpers[] = 'Tree';
-        $categoriestree = $this->Category->find('all', array(
+        $categoriestree = $this->Category->find('all', [
             'recursive' => -1,
-            'order' => array(
+            'order' => [
                 'Category.lft' => 'ASC'
-            ),
-            'conditions' => array(
-            ),
-        ));
+            ],
+            'conditions' => [
+            ],
+        ]);
         $this->set(compact('categoriestree'));
     }
 
@@ -91,14 +91,14 @@ class CategoriesController extends AppController {
         if (!$this->Category->exists($id)) {
             throw new NotFoundException('Invalid category');
         }
-        $category = $this->Category->find('first', array(
-            'contain' => array(
+        $category = $this->Category->find('first', [
+            'contain' => [
                 'ParentCategory'
-            ),
-            'conditions' => array(
+            ],
+            'conditions' => [
                 'Category.id' => $id
-            )
-        ));
+            ],
+        ]);
         $this->set(compact('category'));
     }
 
@@ -109,7 +109,7 @@ class CategoriesController extends AppController {
             $this->Category->create();
             if ($this->Category->save($this->request->data)) {
                 $this->Flash->flash('The category has been saved');
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->flash('The category could not be saved. Please, try again.');
             }
@@ -128,12 +128,16 @@ class CategoriesController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
                 $this->Flash->flash('The category has been saved');
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->flash('The category could not be saved. Please, try again.');
             }
         } else {
-            $this->request->data = $this->Category->find('first', array('conditions' => array('Category.id' => $id)));
+            $this->request->data = $this->Category->find('first', [
+                'conditions' => [
+                    'Category.id' => $id
+                ]
+            ]);
         }
 
         $parents = $this->Category->generateTreeList(null, null, null, ' -- ');
@@ -150,10 +154,10 @@ class CategoriesController extends AppController {
         $this->request->onlyAllow('post', 'delete');
         if ($this->Category->delete()) {
             $this->Flash->flash('Category deleted');
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
         }
         $this->Flash->flash('Category was not deleted');
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(['action' => 'index']);
     }
 
 ////////////////////////////////////////////////////////////

@@ -23,19 +23,19 @@ class UsersController extends AppController {
                 $this->User->saveField('last_login', date('Y-m-d H:i:s'));
 
                 if ($this->Auth->user('role') == 'customer') {
-                    return $this->redirect(array(
+                    return $this->redirect([
                         'controller' => 'users',
                         'action' => 'dashboard',
                         'customer' => true,
                         'admin' => false
-                    ));
+                    ]);
                 } elseif ($this->Auth->user('role') == 'admin') {
-                    return $this->redirect(array(
+                    return $this->redirect([
                         'controller' => 'users',
                         'action' => 'dashboard',
                         'manager' => false,
                         'admin' => true
-                    ));
+                    ]);
                 } else {
                     $this->Flash->danger('Login is incorrect');
                 }
@@ -70,20 +70,20 @@ class UsersController extends AppController {
 
         $this->Paginator = $this->Components->load('Paginator');
 
-        $this->Paginator->settings = array(
-            'User' => array(
+        $this->Paginator->settings = [
+            'User' => [
                 'recursive' => -1,
-                'contain' => array(
-                ),
-                'conditions' => array(
-                ),
-                'order' => array(
+                'contain' => [
+                ],
+                'conditions' => [
+                ],
+                'order' => [
                     'Users.name' => 'ASC'
-                ),
+                ],
                 'limit' => 20,
                 'paramType' => 'querystring',
-            )
-        );
+            ]
+        ];
         $users = $this->Paginator->paginate();
         $this->set(compact('users'));
     }
@@ -105,7 +105,7 @@ class UsersController extends AppController {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
                 $this->Flash->flash('The user has been saved');
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->flash('The user could not be saved. Please, try again.');
             }
@@ -122,7 +122,7 @@ class UsersController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
                 $this->Flash->flash('The user has been saved');
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->flash('The user could not be saved. Please, try again.');
             }
@@ -141,7 +141,7 @@ class UsersController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
                 $this->Flash->flash('The user has been saved');
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->flash('The user could not be saved. Please, try again.');
             }
@@ -162,10 +162,10 @@ class UsersController extends AppController {
         }
         if ($this->User->delete()) {
             $this->Flash->flash('User deleted');
-            return $this->redirect(array('action'=>'index'));
+            return $this->redirect(['action' => 'index']);
         }
         $this->Flash->flash('User was not deleted');
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(['action' => 'index']);
     }
 
 ////////////////////////////////////////////////////////////

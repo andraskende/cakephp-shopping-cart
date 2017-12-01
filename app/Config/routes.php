@@ -21,33 +21,33 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-	Router::connect('/', array('controller' => 'products', 'action' => 'index'));
+    Router::connect('/', ['controller' => 'products', 'action' => 'index']);
 
-	Router::connect('/shop/:slug', array('controller' => 'products', 'action' => 'view'), array('pass' => array('slug')));
+    Router::connect('/product/:slug', ['controller' => 'products', 'action' => 'view'], ['pass' => ['slug']]);
 
-	Router::connect('/brand/:slug', array('controller' => 'brands', 'action' => 'view'), array('pass' => array('slug')));
+    Router::connect('/brand/:slug', ['controller' => 'brands', 'action' => 'view'], ['pass' => ['slug']]);
 
-	Router::connect('/category/:slug', array('controller' => 'categories', 'action' => 'view'), array('pass' => array('slug')));
+    Router::connect('/category/:slug', ['controller' => 'categories', 'action' => 'view'], ['pass' => ['slug']]);
 
-	Router::connect('/sitemap.xml', array('controller' => 'products', 'action' => 'sitemap'));
+    Router::connect('/sitemap.xml', ['controller' => 'products', 'action' => 'sitemap']);
 
-	Router::connect('/admin', array('controller' => 'users', 'action' => 'dashboard', 'admin' => true));
-	Router::connect('/customer', array('controller' => 'users', 'action' => 'dashboard', 'customer' => true));
+    Router::connect('/admin', ['controller' => 'users', 'action' => 'dashboard', 'admin' => true]);
+    Router::connect('/customer', ['controller' => 'users', 'action' => 'dashboard', 'customer' => true]);
 
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+    Router::connect('/pages/*', ['controller' => 'pages', 'action' => 'display']);
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
  */
-	CakePlugin::routes();
+    CakePlugin::routes();
 
 /**
  * Load the CakePHP default routes. Remove this if you do not want to use
  * the built-in default routes.
  */
-	require CAKE . 'Config' . DS . 'routes.php';
+    require CAKE . 'Config' . DS . 'routes.php';
 

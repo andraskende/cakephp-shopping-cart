@@ -1,25 +1,7 @@
-<?php
-/**
-*
-* PHP 5
-*
-* CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
-* Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
-*
-* Licensed under The MIT License
-* Redistributions of files must retain the above copyright notice.
-*
-* @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
-* @link          http://cakephp.org CakePHP(tm) Project
-* @package       Cake.View.Layouts
-* @since         CakePHP(tm) v 0.10.0.1076
-* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
-*/
-
-?>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title><?php echo $title_for_layout; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +47,7 @@
                     <li class="nav-item"><?php echo $this->Html->link('Categories', ['controller' => 'categories', 'action' => 'index'], ['class' => 'nav-link']); ?></li>
                     <li class="nav-item"><?php echo $this->Html->link('Search', ['controller' => 'products', 'action' => 'search'], ['class' => 'nav-link']); ?></li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
+                <div class="form-inline my-2 my-lg-0">
                     <?php echo $this->Form->create(false, ['type' => 'get',
                         'url' => ['controller' => 'products', 'action' => 'search']
                     ]); ?>
@@ -77,7 +59,7 @@
                     <span id="cartbutton" style="display:none;">
                         <?php echo $this->Html->link('<i class="fa fa-cart-plus"></i> &nbsp; Shopping Cart', ['controller' => 'shop', 'action' => 'cart'], ['class' => 'btn btn-sm btn-success', 'escape' => false]); ?>
                     </span>
-                </form>
+                </div>
             </div>
         </div>
     </nav>

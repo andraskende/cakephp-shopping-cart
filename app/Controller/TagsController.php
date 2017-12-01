@@ -4,19 +4,21 @@ class TagsController extends AppController {
 
 ////////////////////////////////////////////////////////////
 
-    public $components = array('Paginator');
+    public $components = [
+        'Paginator'
+    ];
 
 ////////////////////////////////////////////////////////////
 
     public function admin_index() {
 
-        $this->Paginator->settings = array(
+        $this->Paginator->settings = [
             'recursive' => -1,
-            'order' => array(
+            'order' => [
                 'Tag.name' => 'ASC'
-            ),
+            ],
             'limit' => 100,
-        );
+        ];
 
         $this->set('tags', $this->Paginator->paginate('Tag'));
     }
@@ -27,7 +29,7 @@ class TagsController extends AppController {
         if (!$this->Tag->exists($id)) {
             throw new NotFoundException('Invalid tag');
         }
-        $options = array('conditions' => array('Tag.id' => $id));
+        $options = ['conditions' => ['Tag.id' => $id]];
         $this->set('tag', $this->Tag->find('first', $options));
     }
 
@@ -39,7 +41,7 @@ class TagsController extends AppController {
             if ($this->Tag->save($this->request->data)) {
                 $this->Flash->flash('The tag has been saved.');
                 return $this->redirect($this->referer());
-                // return $this->redirect(array('action' => 'index'));
+                // return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->flash('The tag could not be saved. Please, try again.');
             }
@@ -52,15 +54,15 @@ class TagsController extends AppController {
         if (!$this->Tag->exists($id)) {
             throw new NotFoundException('Invalid tag');
         }
-        if ($this->request->is(array('post', 'put'))) {
+        if ($this->request->is(['post', 'put'])) {
             if ($this->Tag->save($this->request->data)) {
                 $this->Flash->flash('The tag has been saved.');
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->flash('The tag could not be saved. Please, try again.');
             }
         } else {
-            $options = array('conditions' => array('Tag.id' => $id));
+            $options = ['conditions' => ['Tag.id' => $id]];
             $this->request->data = $this->Tag->find('first', $options);
         }
     }
@@ -78,7 +80,7 @@ class TagsController extends AppController {
         } else {
             $this->Flash->flash('The tag could not be deleted. Please, try again.');
         }
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(['action' => 'index']);
     }
 
 ////////////////////////////////////////////////////////////

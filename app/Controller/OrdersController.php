@@ -8,20 +8,20 @@ class OrdersController extends AppController {
 
         $this->Paginator = $this->Components->load('Paginator');
 
-        $this->Paginator->settings = array(
-            'Order' => array(
+        $this->Paginator->settings = [
+            'Order' => [
                 'recursive' => -1,
-                'contain' => array(
-                ),
-                'conditions' => array(
-                ),
-                'order' => array(
+                'contain' => [
+                ],
+                'conditions' => [
+                ],
+                'order' => [
                     'Order.created' => 'DESC'
-                ),
+                ],
                 'limit' => 20,
                 'paramType' => 'querystring',
-            )
-        );
+            ]
+        ];
         $orders = $this->Paginator->paginate();
 
         $this->set(compact('orders'));
@@ -30,14 +30,14 @@ class OrdersController extends AppController {
 ////////////////////////////////////////////////////////////
 
     public function admin_view($id = null) {
-        $order = $this->Order->find('first', array(
+        $order = $this->Order->find('first', [
             'recursive' => 1,
-            'conditions' => array(
+            'conditions' => [
                 'Order.id' => $id
-            )
-        ));
+            ]
+        ]);
         if (empty($order)) {
-            return $this->redirect(array('action'=>'index'));
+            return $this->redirect(['action' => 'index']);
         }
         $this->set(compact('order'));
     }
@@ -52,7 +52,7 @@ class OrdersController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Order->save($this->request->data)) {
                 $this->Flash->flash('The order has been saved');
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->flash('The order could not be saved. Please, try again.');
             }
@@ -73,10 +73,10 @@ class OrdersController extends AppController {
         }
         if ($this->Order->delete()) {
             $this->Flash->flash('Order deleted');
-            return $this->redirect(array('action'=>'index'));
+            return $this->redirect(['action' => 'index']);
         }
         $this->Flash->flash('Order was not deleted');
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(['action' => 'index']);
     }
 
 ////////////////////////////////////////////////////////////

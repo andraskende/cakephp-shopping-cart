@@ -35,35 +35,35 @@ class AppController extends Controller {
 
 ////////////////////////////////////////////////////////////
 
-    public $components = array(
+    public $components = [
         'Session',
         'Auth',
         'Flash',
         'DebugKit.Toolbar',
-        //'Security',
-    );
+        // 'Security',
+    ];
 
 ////////////////////////////////////////////////////////////
 
     public function beforeFilter() {
 
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => false);
-        $this->Auth->loginRedirect = array('controller' => 'orders', 'action' => 'index', 'admin' => true);
-        $this->Auth->logoutRedirect = array('controller' => 'products', 'action' => 'index', 'admin' => false);
-        $this->Auth->authorize = array('Controller');
+        $this->Auth->loginAction = ['controller' => 'users', 'action' => 'login', 'admin' => false];
+        $this->Auth->loginRedirect = ['controller' => 'orders', 'action' => 'index', 'admin' => true];
+        $this->Auth->logoutRedirect = ['controller' => 'products', 'action' => 'index', 'admin' => false];
+        $this->Auth->authorize = ['Controller'];
 
-        $this->Auth->authenticate = array(
-            'Form' => array(
+        $this->Auth->authenticate = [
+            'Form' => [
                 'userModel' => 'User',
-                'fields' => array(
+                'fields' => [
                     'username' => 'username',
                     'password' => 'password'
-                ),
-                'scope' => array(
+                ],
+                'scope' => [
                     'User.active' => 1,
-                )
-            )
-        );
+                ]
+            ]
+        ];
 
         if(isset($this->request->params['admin']) && ($this->request->params['prefix'] == 'admin')) {
             if($this->Session->check('Auth.User')) {
@@ -106,7 +106,7 @@ class AppController extends Controller {
         $model = $this->modelClass;
         if ($this->$model && $field && $id) {
             $field = $this->$model->escapeField($field);
-            return $this->$model->updateAll(array($field => '1 -' . $field), array($this->$model->escapeField() => $id));
+            return $this->$model->updateAll([$field => '1 -' . $field], [$this->$model->escapeField() => $id]);
         }
         if(!$this->RequestHandler->isAjax()) {
             return $this->redirect($this->referer());

@@ -4,11 +4,11 @@ class ShopController extends AppController {
 
 //////////////////////////////////////////////////
 
-    public $components = array(
+    public $components = [
         'Cart',
         'Paypal',
         'AuthorizeNet'
-    );
+    ];
 
 //////////////////////////////////////////////////
 
@@ -54,6 +54,7 @@ class ShopController extends AppController {
 //////////////////////////////////////////////////
 
     public function itemupdate() {
+
         if ($this->request->is('ajax')) {
 
             $id = $this->request->data['id'];
@@ -90,7 +91,7 @@ class ShopController extends AppController {
         if(!empty($product)) {
             $this->Flash->danger($product['Product']['name'] . ' was removed from your shopping cart');
         }
-        return $this->redirect(array('action' => 'cart'));
+        return $this->redirect(['action' => 'cart']);
     }
 
 //////////////////////////////////////////////////
@@ -104,7 +105,7 @@ class ShopController extends AppController {
             }
             // $this->Flash->success('Shopping Cart is updated.');
         }
-        return $this->redirect(array('action' => 'cart'));
+        return $this->redirect(['action' => 'cart']);
     }
 
 //////////////////////////////////////////////////
@@ -130,7 +131,7 @@ class ShopController extends AppController {
                 $order = $this->request->data['Order'];
                 $order['order_type'] = 'creditcard';
                 $this->Session->write('Shop.Order', $order + $shop['Order']);
-                return $this->redirect(array('action' => 'review'));
+                return $this->redirect(['action' => 'review']);
             } else {
                 $this->Flash->danger('The form could not be saved. Please, try again.');
             }
@@ -162,7 +163,7 @@ class ShopController extends AppController {
         $ack = strtoupper($paypal['ACK']);
         if($ack == 'SUCCESS' || $ack == 'SUCESSWITHWARNING') {
             $this->Session->write('Shop.Paypal.Details', $paypal);
-            return $this->redirect(array('action' => 'review'));
+            return $this->redirect(['action' => 'review']);
         } else {
             $ErrorCode = urldecode($paypal['L_ERRORCODE0']);
             $ErrorShortMsg = urldecode($paypal['L_SHORTMESSAGE0']);
@@ -199,7 +200,6 @@ class ShopController extends AppController {
 
                 if($shop['Order']['order_type'] == 'paypal') {
                     $paypal = $this->Paypal->ConfirmPayment($order['Order']['total']);
-                    //debug($resArray);
                     $ack = strtoupper($paypal['ACK']);
                     if($ack == 'SUCCESS' || $ack == 'SUCCESSWITHWARNING') {
                         $order['Order']['status'] = 2;
@@ -209,23 +209,23 @@ class ShopController extends AppController {
                 }
 
                 if((Configure::read('Settings.AUTHORIZENET_ENABLED') == 1) && $shop['Order']['order_type'] == 'creditcard') {
-                    $payment = array(
+                    $payment = [
                         'creditcard_number' => $this->request->data['Order']['creditcard_number'],
                         'creditcard_month' => $this->request->data['Order']['creditcard_month'],
                         'creditcard_year' => $this->request->data['Order']['creditcard_year'],
                         'creditcard_code' => $this->request->data['Order']['creditcard_code'],
-                    );
+                    ];
                     try {
                         $authorizeNet = $this->AuthorizeNet->charge($shop['Order'], $payment);
                     } catch(Exception $e) {
                         $this->Flash->flash($e->getMessage());
-                        return $this->redirect(array('action' => 'review'));
+                        return $this->redirect(['action' => 'review']);
                     }
                     $order['Order']['authorization'] = $authorizeNet[4];
                     $order['Order']['transaction'] = $authorizeNet[6];
                 }
 
-                $save = $this->Order->saveAll($order, array('validate' => 'first'));
+                $save = $this->Order->saveAll($order, ['validate' => 'first']);
                 if($save) {
 
                     $this->set(compact('shop'));
@@ -238,9 +238,9 @@ class ShopController extends AppController {
                             ->subject('Shop Order')
                             ->template('order')
                             ->emailFormat('text')
-                            ->viewVars(array('shop' => $shop))
+                            ->viewVars(['shop' => $shop])
                             ->send();
-                    return $this->redirect(array('action' => 'success'));
+                    return $this->redirect(['action' => 'success']);
                 } else {
                     $errors = $this->Order->invalidFields();
                     $this->set(compact('errors'));
