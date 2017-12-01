@@ -1,0 +1,92 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+body {
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    background-color: #BBBBBB;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.content {
+    background-color: #FFFFFF;
+}
+
+.footer {
+    background: #E5E5E5;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#flashMessage{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #CC0000;
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.f10 {
+    font-size: 10px;
+}
+
+.f11 {
+    font-size: 11px;
+}
+
+.f12 {
+    font-size: 12px;
+}
+
+.error {
+    font-size: 11px;
+    color: red;
+    font-weight: normal;
+}
+
+.sqldump {
+    font-size: 80%;
+    padding: 15px;
+}
+
+.flash-msg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10000;
+}
+
+.px60 {
+    height: 60px;
+}
+
+.checkbox {
+    padding-left: 20px;
+}
+
+.radio label,
+.checkbox label {
+    display: inline;
+    padding-left: 0px;
+}
+
+.tl { text-align: left }
+.tr { text-align: right }
+.tc { text-align: center }
+
+@media (max-width: 767px) {
+
+    .content {
+        padding: 10px;
+    }
+
+    .footer {
+        padding: 10px;
+    }
+
+}
